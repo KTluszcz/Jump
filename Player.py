@@ -17,4 +17,15 @@ class Player(pg.sprite.Sprite):
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
         self.pos = vec(WIDTH / 2, HEIGHT / 2)
         self.vel = vec(0, 0)
-        self.acc = vec(0, 0)
+        self.acc = vec(0, 0.2)
+
+    def update(self):
+        self.vel += self.acc
+
+        if self.rect.bottom > HEIGHT:
+            self.pos.y = HEIGHT
+            self.acc.y = 0
+            self.vel.y = 0
+
+        self.pos += self.vel
+        self.rect.midbottom = self.pos

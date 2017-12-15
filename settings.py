@@ -2,6 +2,8 @@ TITLE = "Jumpy!"
 WIDTH = 480
 HEIGHT = 600
 FPS = 60
+# movement
+PLAYER_ACC = 0.2
 
 # define colors
 WHITE = (255, 255, 255)

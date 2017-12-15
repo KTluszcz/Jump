@@ -20,12 +20,36 @@ class Player(pg.sprite.Sprite):
         self.acc = vec(0, 0.2)
 
     def update(self):
+        self.move()
+
+    def move(self):
+        self.acc.x = 0
+
+        keys = pg.key.get_pressed()
+        if keys[pg.K_LEFT]:
+            self.acc.x = -PLAYER_ACC
+        if keys[pg.K_RIGHT]:
+            self.acc.x = PLAYER_ACC
+
         self.vel += self.acc
 
-        if self.rect.bottom > HEIGHT:
-            self.pos.y = HEIGHT
+        # dolne ograniczenie
+        if self.pos.y > HEIGHT - self.rect.height / 2:
+            self.pos.y = HEIGHT - self.rect.height / 2
             self.acc.y = 0
             self.vel.y = 0
 
+        # prawe ograniczenie
+        if self.pos.x < 0 + self.rect.width / 2:
+            self.pos.x = 0 + self.rect.width / 2
+            self.acc.x = 0
+            self.vel.x = 0
+
+        # prawe ograniczenie
+        if self.pos.x > WIDTH - self.rect.width / 2:
+            self.pos.x = WIDTH - self.rect.width / 2
+            self.acc.x = 0
+            self.vel.x = 0
+
         self.pos += self.vel
-        self.rect.midbottom = self.pos
+        self.rect.center = self.pos

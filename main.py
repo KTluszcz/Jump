@@ -2,6 +2,7 @@ import pygame as pg
 import random
 from settings import *
 from Player import *
+from Platform import *
 
 class Game:
     def __init__(self):
@@ -16,8 +17,10 @@ class Game:
     def new(self):
         # start a new game
         self.all_sprites = pg.sprite.Group()
-        self.player = Player()
-        self.all_sprites.add(self.player)
+        self.platforms = pg.sprite.Group()
+        self.player = Player(self)
+        for plat in PLATFORM_LIST:
+            Platform(plat[0],plat[1],plat[2],plat[3],self)
         self.run()
 
     def run(self):
